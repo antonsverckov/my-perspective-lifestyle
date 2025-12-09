@@ -1,12 +1,9 @@
 import Header from "@/components/Header";
-import ArticleCard from "@/components/ArticleCard";
 import HeroSection from "@/components/HeroSection";
 import IntroSection from "@/components/IntroSection";
-import { articles } from "@/data/articles";
+import ProgramsSection from "@/components/ProgramsSection";
 
 const Index = () => {
-  const featuredArticles = articles.slice(0, 6);
-
   return (
     <div className="min-h-screen bg-background animate-fade-in">
       <Header />
@@ -18,41 +15,59 @@ const Index = () => {
         {/* Intro Section */}
         <IntroSection />
 
-        {/* Featured Articles Grid */}
-        <section id="articles" className="py-12">
-          <div className="flex items-center justify-between mb-12 animate-slide-up">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Featured Articles</h2>
-            <a href="#all" className="text-sm font-medium text-muted-foreground hover:text-accent transition-colors px-4 py-2 rounded-full hover:bg-muted/60">
-              View all →
-            </a>
-          </div>
+        {/* Programs Section */}
+        <ProgramsSection />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredArticles.map((article, index) => (
-              <div key={article.id} className={`animate-slide-up stagger-${Math.min(index + 1, 6)}`}>
-                <ArticleCard {...article} size="small" />
+        {/* Benefits Section */}
+        <section className="py-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center p-8 rounded-[2rem] bg-muted animate-slide-up stagger-1">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
+                <span className="text-2xl">🎤</span>
               </div>
-            ))}
+              <h3 className="text-xl font-bold mb-2">Индивидуальный подход</h3>
+              <p className="text-muted-foreground">
+                Каждое занятие адаптировано под ваш уровень, цели и особенности голоса
+              </p>
+            </div>
+
+            <div className="text-center p-8 rounded-[2rem] bg-muted animate-slide-up stagger-2">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
+                <span className="text-2xl">📚</span>
+              </div>
+              <h3 className="text-xl font-bold mb-2">Проверенные методики</h3>
+              <p className="text-muted-foreground">
+                Авторские программы, основанные на современных техниках обучения вокалу
+              </p>
+            </div>
+
+            <div className="text-center p-8 rounded-[2rem] bg-muted animate-slide-up stagger-3">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
+                <span className="text-2xl">✨</span>
+              </div>
+              <h3 className="text-xl font-bold mb-2">Видимый результат</h3>
+              <p className="text-muted-foreground">
+                Уже после первых занятий вы почувствуете прогресс и уверенность в голосе
+              </p>
+            </div>
           </div>
         </section>
 
-        {/* Newsletter Section */}
+        {/* CTA Section */}
         <section className="my-20 rounded-[2.5rem] bg-card p-12 md:p-16 text-center animate-scale-in">
           <div className="max-w-2xl mx-auto space-y-8">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Stay inspired.</h2>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+              Готовы начать петь?
+            </h2>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Subscribe to receive our latest articles and insights directly in your inbox.
+              Запишитесь на пробное занятие и сделайте первый шаг к своему новому голосу
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="flex-1 px-6 py-4 rounded-full border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring transition-all"
-              />
-              <button className="px-10 py-4 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 hover:scale-105 transition-all">
-                Subscribe
-              </button>
-            </div>
+            <button 
+              onClick={() => document.getElementById("programs")?.scrollIntoView({ behavior: "smooth" })}
+              className="px-10 py-4 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 hover:scale-105 transition-all"
+            >
+              Выбрать программу
+            </button>
           </div>
         </section>
       </main>
@@ -60,41 +75,32 @@ const Index = () => {
       {/* Footer */}
       <footer className="border-t border-border mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-8">
             <div>
-              <h3 className="font-semibold mb-4">Explore</h3>
+              <h3 className="font-semibold mb-4">Программы</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="/wellness" className="hover:text-accent transition-colors">Wellness</a></li>
-                <li><a href="/travel" className="hover:text-accent transition-colors">Travel</a></li>
-                <li><a href="/creativity" className="hover:text-accent transition-colors">Creativity</a></li>
-                <li><a href="/growth" className="hover:text-accent transition-colors">Growth</a></li>
+                <li><a href="#programs" className="hover:text-accent transition-colors">Основы вокала</a></li>
+                <li><a href="#programs" className="hover:text-accent transition-colors">Профессиональный вокал</a></li>
+                <li><a href="#programs" className="hover:text-accent transition-colors">Индивидуальная программа</a></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-4">About</h3>
+              <h3 className="font-semibold mb-4">Информация</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="/about" className="hover:text-accent transition-colors">Our Story</a></li>
-                <li><a href="/authors" className="hover:text-accent transition-colors">Authors</a></li>
-                <li><a href="/contact" className="hover:text-accent transition-colors">Contact</a></li>
+                <li><a href="/about" className="hover:text-accent transition-colors">Обо мне</a></li>
+                <li><a href="/contact" className="hover:text-accent transition-colors">Контакты</a></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-4">Resources</h3>
+              <h3 className="font-semibold mb-4">Правовая информация</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="/style-guide" className="hover:text-accent transition-colors">Style Guide</a></li>
-                <li><a href="/#newsletter" className="hover:text-accent transition-colors">Newsletter</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-4">Legal</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="/privacy" className="hover:text-accent transition-colors">Privacy Policy</a></li>
-                <li><a href="/terms" className="hover:text-accent transition-colors">Terms of Service</a></li>
+                <li><a href="/privacy" className="hover:text-accent transition-colors">Политика конфиденциальности</a></li>
+                <li><a href="/terms" className="hover:text-accent transition-colors">Договор-оферта</a></li>
               </ul>
             </div>
           </div>
           <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            <p>© 2025 Perspective. All rights reserved.</p>
+            <p>© 2025 Вокальная студия. Все права защищены.</p>
           </div>
         </div>
       </footer>
