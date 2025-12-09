@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -7,15 +7,15 @@ import { toast } from "sonner";
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
+    phone: "",
     email: "",
-    subject: "",
     message: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Message sent! We'll get back to you soon.");
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    toast.success("Сообщение отправлено! Я свяжусь с вами в ближайшее время.");
+    setFormData({ name: "", phone: "", email: "", message: "" });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -33,21 +33,21 @@ const Contact = () => {
         {/* Hero Section */}
         <div className="mb-16 text-center space-y-6">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight animate-slide-down">
-            Get in Touch
+            Контакты
           </h1>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed animate-slide-up stagger-1">
-            Have a question, suggestion, or just want to say hello? We'd love to hear from you.
+            Есть вопросы? Напишите мне, и я обязательно отвечу
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <div className="rounded-2xl bg-card p-8">
-            <h2 className="text-2xl font-bold mb-6">Send us a message</h2>
-        <form onSubmit={handleSubmit} className="space-y-6 animate-slide-up stagger-2">
-          <div>
+            <h2 className="text-2xl font-bold mb-6">Написать сообщение</h2>
+            <form onSubmit={handleSubmit} className="space-y-6 animate-slide-up stagger-2">
+              <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-2">
-                  Name
+                  Имя
                 </label>
                 <input
                   type="text"
@@ -57,7 +57,22 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
-                  placeholder="Your name"
+                  placeholder="Как вас зовут?"
+                />
+              </div>
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium mb-2">
+                  Телефон
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                  placeholder="+7 (999) 123-45-67"
                 />
               </div>
               <div>
@@ -70,29 +85,13 @@ const Contact = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  required
                   className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
-                  placeholder="your.email@example.com"
-                />
-              </div>
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
-                  placeholder="What's this about?"
+                  placeholder="example@mail.ru"
                 />
               </div>
               <div>
                 <label htmlFor="message" className="block text-sm font-medium mb-2">
-                  Message
+                  Сообщение
                 </label>
                 <textarea
                   id="message"
@@ -102,14 +101,14 @@ const Contact = () => {
                   required
                   rows={6}
                   className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring resize-none"
-                  placeholder="Tell us what's on your mind..."
+                  placeholder="Расскажите о себе или задайте вопрос..."
                 />
               </div>
               <Button 
                 type="submit"
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-full py-6"
               >
-                Send Message
+                Отправить сообщение
               </Button>
             </form>
           </div>
@@ -117,16 +116,36 @@ const Contact = () => {
           {/* Contact Information */}
           <div className="space-y-8">
             <div className="rounded-2xl bg-card p-8">
-              <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
+              <h2 className="text-2xl font-bold mb-6">Контактная информация</h2>
               <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">Телефон</h3>
+                    <p className="text-muted-foreground">+7 (999) 123-45-67</p>
+                    <p className="text-muted-foreground text-sm">Пн-Сб, 10:00-20:00</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                    <Send className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">Telegram</h3>
+                    <p className="text-muted-foreground">@vocal_studio</p>
+                    <p className="text-muted-foreground text-sm">Быстрые ответы</p>
+                  </div>
+                </div>
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Email</h3>
-                    <p className="text-muted-foreground">hello@perspective.blog</p>
-                    <p className="text-muted-foreground text-sm">We'll respond within 24 hours</p>
+                    <p className="text-muted-foreground">hello@vocal-studio.ru</p>
+                    <p className="text-muted-foreground text-sm">Отвечу в течение 24 часов</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -134,43 +153,33 @@ const Contact = () => {
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">Location</h3>
-                    <p className="text-muted-foreground">San Francisco, CA</p>
-                    <p className="text-muted-foreground text-sm">Remote-first team</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Phone</h3>
-                    <p className="text-muted-foreground">+1 (555) 123-4567</p>
-                    <p className="text-muted-foreground text-sm">Mon-Fri, 9am-5pm PST</p>
+                    <h3 className="font-semibold mb-1">Формат занятий</h3>
+                    <p className="text-muted-foreground">Онлайн / Москва</p>
+                    <p className="text-muted-foreground text-sm">Zoom, Skype или очно</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="rounded-2xl bg-muted p-8">
-              <h3 className="text-xl font-bold mb-4">Frequently Asked Questions</h3>
+              <h3 className="text-xl font-bold mb-4">Часто задаваемые вопросы</h3>
               <div className="space-y-4 text-sm">
                 <div>
-                  <h4 className="font-semibold mb-1">Can I contribute to Perspective?</h4>
+                  <h4 className="font-semibold mb-1">Нужен ли музыкальный слух?</h4>
                   <p className="text-muted-foreground">
-                    Yes! We welcome guest contributions. Please use the form to submit your pitch or article idea.
+                    Нет! Музыкальный слух можно развить. Это один из первых навыков, над которым мы работаем.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-1">How do I advertise with you?</h4>
+                  <h4 className="font-semibold mb-1">Как проходят онлайн-занятия?</h4>
                   <p className="text-muted-foreground">
-                    For advertising inquiries, email partnerships@perspective.blog with details about your brand.
+                    Через Zoom или Skype. Вам понадобятся наушники, микрофон и стабильный интернет.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-1">Can I republish your content?</h4>
+                  <h4 className="font-semibold mb-1">Есть ли пробное занятие?</h4>
                   <p className="text-muted-foreground">
-                    Please contact us for permissions and licensing. We're generally open to republishing with proper attribution.
+                    Да, первое занятие — ознакомительное. Мы познакомимся, оценим ваш уровень и обсудим цели.
                   </p>
                 </div>
               </div>
