@@ -19,6 +19,7 @@ const ContactModal = ({ isOpen, onClose, program }: ContactModalProps) => {
     name: "",
     phone: "",
     email: "",
+    telegram: "",
     message: ""
   });
 
@@ -44,7 +45,8 @@ const ContactModal = ({ isOpen, onClose, program }: ContactModalProps) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
-          program: program?.title || null
+          program: program?.title || null,
+          programPrice: program?.price ?? null
         })
       });
 
@@ -59,7 +61,7 @@ const ContactModal = ({ isOpen, onClose, program }: ContactModalProps) => {
         description: "Я свяжусь с вами в ближайшее время"
       });
 
-      setFormData({ name: "", phone: "", email: "", message: "" });
+      setFormData({ name: "", phone: "", email: "", telegram: "", message: "" });
       onClose();
     } catch (error) {
       toast({
@@ -132,18 +134,33 @@ const ContactModal = ({ isOpen, onClose, program }: ContactModalProps) => {
               />
             </div>
 
-            <div>
-              <label htmlFor="email" className="text-sm font-medium mb-1.5 block">
-                Email
-              </label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="example@mail.ru"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="rounded-xl"
-              />
+            <div className="space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-3">
+              <div>
+                <label htmlFor="telegram" className="text-sm font-medium mb-1.5 block">
+                  Telegram
+                </label>
+                <Input
+                  id="telegram"
+                  placeholder="@username"
+                  value={formData.telegram}
+                  onChange={(e) => setFormData({ ...formData, telegram: e.target.value })}
+                  className="rounded-xl"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="text-sm font-medium mb-1.5 block">
+                  Email
+                </label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="example@mail.ru"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="rounded-xl"
+                />
+              </div>
             </div>
 
             <div>

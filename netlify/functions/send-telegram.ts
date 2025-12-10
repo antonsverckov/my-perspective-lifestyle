@@ -1,6 +1,7 @@
 const headers = {
   "Content-Type": "application/json",
   "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type",
 };
 
 const respond = (statusCode: number, body: Record<string, unknown>) => ({
@@ -28,25 +29,40 @@ export const handler = async (event: {
     return respond(500, { error: "Server misconfigured" });
   }
 
-  const payload = event.body ? JSON.parse(event.body) : {};
-  const { name, phone, email, message, program } = payload as {
+  let payload: unknown;
+  try {
+    payload = event.body ? JSON.parse(event.body) : {};
+  } catch {
+    return respond(400, { error: "Invalid JSON" });
+  }
+
+  const { name, phone, message, program, telegram, email, programPrice } = payload as {
     name?: string;
     phone?: string;
-    email?: string;
     message?: string;
     program?: string;
+    telegram?: string;
+    email?: string;
+    programPrice?: number;
   };
 
   if (!name || !phone) {
     return respond(400, { error: "Name and phone are required" });
   }
 
+  const formattedPrice =
+    typeof programPrice === "number"
+      ? `${programPrice.toLocaleString("ru-RU")} ₽`
+      : "—";
+
   const text = [
     "Новая заявка с сайта:",
     `Имя: ${name}`,
     `Телефон: ${phone}`,
+    `Telegram: ${telegram || "—"}`,
     `Email: ${email || "—"}`,
     `Программа: ${program || "—"}`,
+    `Стоимость: ${formattedPrice}`,
     `Сообщение: ${message || "—"}`,
   ].join("\n");
 
