@@ -12,8 +12,8 @@ const HeroSection = () => {
       <div className="grid md:grid-cols-2 gap-6 md:gap-12 p-6 md:p-12 lg:p-16">
         {/* Left side - Image */}
         <div className="relative aspect-[4/3] md:aspect-auto rounded-[2rem] overflow-hidden animate-scale-in">
-          <img
-            src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=1920&q=80"
+          <img 
+            src="/images/hero-vocal.jpg"
             alt="Вокальное обучение"
             className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
           />

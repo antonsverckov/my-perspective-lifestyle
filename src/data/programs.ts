@@ -20,7 +20,7 @@ export const programs: Program[] = [
     duration: "6-12 недель",
     lessons: 12,
     price: 35000,
-    image: "https://images.unsplash.com/photo-1507878866276-a947ef722fee?w=1920&q=80",
+    image: "/images/program-voice-zero.jpg",
     features: [
       "Дыхание и контроль воздушного потока",
       "Снятие зажимов: челюсть, плечи, гортань",
@@ -45,7 +45,7 @@ export const programs: Program[] = [
     duration: "8-16 недель",
     lessons: 16,
     price: 48000,
-    image: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=1920&q=80",
+    image: "/images/program-vocal-plus.jpg",
     features: [
       "Регистры: грудь, голова, фальцет, микст + плавные переходы",
       "Дыхание по фразам, где брать и где нельзя",
@@ -71,7 +71,7 @@ export const programs: Program[] = [
     duration: "12 недель",
     lessons: 18,
     price: 100000,
-    image: "https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=1920&q=80",
+    image: "/images/program-artist-author.jpg",
     features: [
       "Убеждения и проявленность, уверенность на записи и сцене",
       "Поток дыхания, энергия звука, расширение диапазона",
