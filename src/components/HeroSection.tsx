@@ -8,7 +8,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative rounded-[2.5rem] overflow-hidden bg-muted my-12 animate-fade-in">
+    <section id="hero" className="relative rounded-[2.5rem] overflow-hidden bg-muted my-12 animate-fade-in">
       <div className="grid md:grid-cols-2 gap-6 md:gap-12 p-6 md:p-12 lg:p-16">
         {/* Left side - Image */}
         <div className="relative aspect-[4/3] md:aspect-auto rounded-[2rem] overflow-hidden animate-scale-in">

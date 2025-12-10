@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import IntroSection from "@/components/IntroSection";
 import ProgramsSection from "@/components/ProgramsSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 
 const Index = () => {
   return (
@@ -15,8 +16,40 @@ const Index = () => {
         {/* Intro Section */}
         <IntroSection />
 
+        {/* About Section */}
+        <section id="about" className="py-16">
+          <div className="rounded-[2rem] bg-card border border-border p-8 md:p-12 grid grid-cols-1 md:grid-cols-3 gap-10 animate-slide-up">
+            <div className="space-y-4 md:col-span-1">
+              <span className="px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">Обо мне</span>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+                Антон — педагог по вокалу и автор программ
+              </h2>
+              <p className="text-muted-foreground">
+                Готовлю новичков и продолжающих: от первых нот и снятия зажимов до записи авторских треков и уверенных выступлений.
+              </p>
+            </div>
+            <div className="space-y-4 md:col-span-2 text-muted-foreground leading-relaxed">
+              <p>
+                Работаю с индивидуальными целями: чистая интонация, расширение диапазона, техника дыхания, регистры, атака звука и стиль. Помогаю убрать страх сцены и стеснение, собрать первые песни или подготовить материал к записи.
+              </p>
+              <p>
+                Онлайн и офлайн форматы, домашки с обратной связью, разбор песен, поддержка между занятиями. В тарифах «Вокал +» и «Артист и автор» — запись и сведение трека в финале.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <span className="px-4 py-2 rounded-full bg-muted text-sm">Работа с новичками и продолжающими</span>
+                <span className="px-4 py-2 rounded-full bg-muted text-sm">Twang, cry, belting, опора</span>
+                <span className="px-4 py-2 rounded-full bg-muted text-sm">Интонация и ритм под метроном</span>
+                <span className="px-4 py-2 rounded-full bg-muted text-sm">Подготовка к записи и сцене</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Programs Section */}
         <ProgramsSection />
+
+        {/* Testimonials Section */}
+        <TestimonialsSection />
 
         {/* Benefits Section */}
         <section className="py-16">
@@ -70,6 +103,39 @@ const Index = () => {
             </button>
           </div>
         </section>
+
+        {/* Contact Section */}
+        <section id="contact" className="py-16">
+          <div className="rounded-[2rem] bg-muted p-8 md:p-12 grid grid-cols-1 md:grid-cols-2 gap-10 items-center animate-slide-up">
+            <div className="space-y-4">
+              <span className="px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">Контакты</span>
+              <h3 className="text-3xl font-bold">Напишите, чтобы подобрать программу</h3>
+              <p className="text-muted-foreground">
+                Отвечу на вопросы, помогу выбрать формат и пришлю первые материалы для старта.
+              </p>
+              <ul className="space-y-2 text-muted-foreground">
+                <li>Telegram: <a className="text-primary hover:underline" href="https://t.me/antonsverchkov" target="_blank" rel="noreferrer">@antonsverchkov</a></li>
+                <li>Email: <a className="text-primary hover:underline" href="mailto:anderik12@mail.ru">anderik12@mail.ru</a></li>
+              </ul>
+            </div>
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="https://t.me/antonsverchkov"
+                target="_blank"
+                rel="noreferrer"
+                className="px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 hover:scale-105 transition-all"
+              >
+                Написать в Telegram
+              </a>
+              <a
+                href="mailto:anderik12@mail.ru"
+                className="px-6 py-3 rounded-full border border-border font-medium hover:border-primary hover:text-primary hover:scale-105 transition-all"
+              >
+                Написать на email
+              </a>
+            </div>
+          </div>
+        </section>
       </main>
 
       {/* Footer */}
@@ -79,23 +145,23 @@ const Index = () => {
             <div>
               <h3 className="font-semibold mb-4">Программы</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#programs" className="hover:text-accent transition-colors">Основы вокала</a></li>
-                <li><a href="#programs" className="hover:text-accent transition-colors">Профессиональный вокал</a></li>
-                <li><a href="#programs" className="hover:text-accent transition-colors">Индивидуальная программа</a></li>
+                <li><a href="#programs" className="hover:text-accent transition-colors">Голос с нуля</a></li>
+                <li><a href="#programs" className="hover:text-accent transition-colors">Вокал +</a></li>
+                <li><a href="#programs" className="hover:text-accent transition-colors">Артист и автор</a></li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Информация</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="/about" className="hover:text-accent transition-colors">Обо мне</a></li>
-                <li><a href="/contact" className="hover:text-accent transition-colors">Контакты</a></li>
+                <li><a href="#about" className="hover:text-accent transition-colors">Обо мне</a></li>
+                <li><a href="#contact" className="hover:text-accent transition-colors">Контакты</a></li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Правовая информация</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="/privacy" className="hover:text-accent transition-colors">Политика конфиденциальности</a></li>
-                <li><a href="/terms" className="hover:text-accent transition-colors">Договор-оферта</a></li>
+                <li><span className="text-muted-foreground/80">Политика конфиденциальности</span></li>
+                <li><span className="text-muted-foreground/80">Договор-оферта</span></li>
               </ul>
             </div>
           </div>

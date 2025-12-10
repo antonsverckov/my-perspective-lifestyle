@@ -2,9 +2,11 @@ import { useState } from "react";
 import ProgramCard from "./ProgramCard";
 import ContactModal from "./ContactModal";
 import { programs, type Program } from "@/data/programs";
+import ProgramDetailsModal from "./ProgramDetailsModal";
 
 const ProgramsSection = () => {
   const [selectedProgram, setSelectedProgram] = useState<Program | null>(null);
+  const [detailsProgram, setDetailsProgram] = useState<Program | null>(null);
 
   return (
     <>
@@ -21,11 +23,24 @@ const ProgramsSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {programs.map((program, index) => (
             <div key={program.id} className={`animate-slide-up stagger-${index + 1}`}>
-              <ProgramCard program={program} onSelect={setSelectedProgram} />
+              <ProgramCard
+                program={program}
+                onSelect={setSelectedProgram}
+                onOpenDetails={setDetailsProgram}
+              />
             </div>
           ))}
         </div>
       </section>
+
+      <ProgramDetailsModal
+        program={detailsProgram}
+        onClose={() => setDetailsProgram(null)}
+        onSelect={(program) => {
+          setSelectedProgram(program);
+          setDetailsProgram(null);
+        }}
+      />
 
       <ContactModal
         isOpen={!!selectedProgram}
