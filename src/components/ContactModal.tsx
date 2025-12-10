@@ -38,17 +38,42 @@ const ContactModal = ({ isOpen, onClose, program }: ContactModalProps) => {
 
     setIsLoading(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      const response = await fetch("/.netlify/functions/send-telegram", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          program: program?.title || null
+        })
+      });
 
-    toast({
-      title: "Заявка отправлена!",
-      description: "Я свяжусь с вами в ближайшее время"
-    });
+      const result = await response.json();
 
-    setFormData({ name: "", phone: "", email: "", message: "" });
-    setIsLoading(false);
-    onClose();
+      if (!response.ok || result?.ok === false) {
+        throw new Error(result?.error || "Не удалось отправить сообщение");
+      }
+
+      toast({
+        title: "Заявка отправлена!",
+        description: "Я свяжусь с вами в ближайшее время"
+      });
+
+      setFormData({ name: "", phone: "", email: "", message: "" });
+      onClose();
+    } catch (error) {
+      toast({
+        title: "Ошибка",
+        description:
+          error instanceof Error
+            ? error.message
+            : "Не удалось отправить заявку, попробуйте позже",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
+
   };
 
   return (
