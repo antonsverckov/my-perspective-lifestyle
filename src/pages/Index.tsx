@@ -46,7 +46,7 @@ const Index = () => {
                   <ul className="space-y-2 text-sm md:text-base text-muted-foreground">
                     {(diagnosticProgram?.features ?? [
                       "Оценка текущего уровня",
-                      "Проверка дыхания и опоры",
+                      "Проверка дыхания",
                       "Разбор зажимов и дикции",
                       "Тест регистров и диапазона",
                       "Первичные упражнения под ваши задачи",
@@ -62,7 +62,7 @@ const Index = () => {
                       "Понятный план развития голоса",
                       "Рекомендации по программе обучения",
                       "Список упражнений для старта",
-                      "Понимание формата занятий и нагрузки",
+                      "Захочется петь и творить дальше",
                     ]).map((item, index) => (
                       <li key={index}>• {item}</li>
                     ))}
@@ -79,8 +79,7 @@ const Index = () => {
                       : "2000 ₽"}
                   </span>
                   <span className="text-foreground/80">
-                    {diagnosticProgram?.duration ? diagnosticProgram.duration : "45–60 минут"} · 100% возврат,
-                    если не зайдёт
+                    {diagnosticProgram?.duration ? diagnosticProgram.duration : "45–60 минут"} · 100% гарантия возврата средств, если тебе не понравится👌
                   </span>
                 </div>
                 <button 
@@ -131,11 +130,22 @@ const Index = () => {
                 </p>
                 
               </div>
-              <div className="flex flex-wrap gap-3">
-                <span className="px-4 py-2 rounded-full bg-muted text-xs md:text-sm">Работа с новичками и продолжающими</span>
-                <span className="px-4 py-2 rounded-full bg-muted text-xs md:text-sm">Twang, cry, belting, опора</span>
-                <span className="px-4 py-2 rounded-full bg-muted text-xs md:text-sm">Интонация и ритм под метроном</span>
-                <span className="px-4 py-2 rounded-full bg-muted text-xs md:text-sm">Подготовка к записи и сцене</span>
+              <div className="flex items-center justify-center gap-6 pt-4 flex-wrap">
+                <img
+                  src="/images/rtr.jpg"
+                  alt="Логотип телеканала Россия 1"
+                  className="h-16 md:h-20 w-auto opacity-80 hover:opacity-100 transition-opacity"
+                />
+                <img
+                  src="/images/битвахоров.webp"
+                  alt="Логотип Битва Хоров"
+                  className="h-16 md:h-20 w-auto opacity-80 hover:opacity-100 transition-opacity"
+                />
+                <img
+                  src="/images/русскийхит.jpg"
+                  alt="Логотип радио Русский Хит"
+                  className="h-16 md:h-20 w-auto opacity-80 hover:opacity-100 transition-opacity"
+                />
               </div>
             </div>
           </div>
