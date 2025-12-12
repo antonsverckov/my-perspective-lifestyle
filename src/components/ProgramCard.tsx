@@ -32,7 +32,7 @@ const ProgramCard = ({ program, onSelect, onOpenDetails }: ProgramCardProps) => 
       {/* Content */}
       <div className="p-6 space-y-4">
         <h3 className="text-2xl font-bold">{program.title}</h3>
-        <p className="text-muted-foreground leading-relaxed">{program.description}</p>
+        <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{program.description}</p>
 
         {/* Meta */}
         <div className="flex items-center gap-4 text-sm text-muted-foreground">

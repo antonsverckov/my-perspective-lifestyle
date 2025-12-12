@@ -100,6 +100,16 @@ All colors MUST be HSL.
     --surface-elevated: 0 0% 16%;
     --shadow-soft: 0 0% 0%;
   }
+
+  .dark body {
+    background-image:
+      radial-gradient(circle at 18% 18%, hsl(var(--primary) / 0.22) 0 160px, transparent 240px),
+      radial-gradient(circle at 82% 12%, hsl(var(--accent) / 0.20) 0 150px, transparent 230px),
+      radial-gradient(circle at 20% 78%, hsl(var(--secondary) / 0.18) 0 130px, transparent 210px),
+      radial-gradient(circle at 88% 72%, hsl(var(--primary) / 0.16) 0 160px, transparent 240px);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
 }
 
 @layer base {
@@ -109,6 +119,13 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    background-image:
+      radial-gradient(circle at 20% 22%, hsl(var(--primary) / 0.12) 0 180px, transparent 240px),
+      radial-gradient(circle at 78% 16%, hsl(var(--accent) / 0.14) 0 160px, transparent 230px),
+      radial-gradient(circle at 18% 78%, hsl(var(--secondary) / 0.10) 0 150px, transparent 220px),
+      radial-gradient(circle at 82% 75%, hsl(var(--primary) / 0.09) 0 170px, transparent 240px);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
   }
 
   html {

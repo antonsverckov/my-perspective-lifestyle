@@ -6,7 +6,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background animate-fade-in">
+    <div className="min-h-screen animate-fade-in">
       <Header />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -18,28 +18,43 @@ const Index = () => {
 
         {/* About Section */}
         <section id="about" className="py-16">
-          <div className="rounded-[2rem] bg-card border border-border p-8 md:p-12 grid grid-cols-1 md:grid-cols-3 gap-10 animate-slide-up">
-            <div className="space-y-4 md:col-span-1">
-              <span className="px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">Обо мне</span>
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-                Антон — педагог по вокалу и автор программ
+          <div className="rounded-[2rem] bg-card border border-border p-8 md:p-12 space-y-8 animate-slide-up">
+            <span className="px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium self-start">
+              Обо мне
+            </span>
+            <div className="space-y-4 text-center">
+              <div className="relative w-full max-w-[14rem] md:max-w-[20rem] mx-auto aspect-[2/3] md:aspect-[5/6] rounded-[1.5rem] overflow-hidden bg-muted group">
+                <img
+                  src="/anton-sverchkov+.jpeg"
+                  alt="Антон Сверчков"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight leading-snug text-center">
+                Антон Сверчков -
+                <br />
+                <span className="text-base md:text-lg font-medium">профессиональный вокалист, композитор и вокальный наставник.</span>
               </h2>
-              <p className="text-muted-foreground">
-                Готовлю новичков и продолжающих: от первых нот и снятия зажимов до записи авторских треков и уверенных выступлений.
-              </p>
             </div>
-            <div className="space-y-4 md:col-span-2 text-muted-foreground leading-relaxed">
-              <p>
-                Работаю с индивидуальными целями: чистая интонация, расширение диапазона, техника дыхания, регистры, атака звука и стиль. Помогаю убрать страх сцены и стеснение, собрать первые песни или подготовить материал к записи.
+
+            <div className="space-y-4">
+              <p className="text-sm md:text-base text-muted-foreground">
+                Я выступаю на сцене с 5 лет и вот уже <span className="font-bold underline">25 лет</span> я изучаю свой голос, разные музыкальные инструменты, написание песен, текстов и аранжировок. А также более 6 лет раскрываю людей и <span className="font-bold underline">возвращаю любовь к себе и своему голосу</span>.
               </p>
-              <p>
-                Онлайн и офлайн форматы, домашки с обратной связью, разбор песен, поддержка между занятиями. В тарифах «Вокал +» и «Артист и автор» — запись и сведение трека в финале.
-              </p>
+              <div className="space-y-3 text-sm md:text-base text-muted-foreground leading-relaxed">
+                <p>
+                  За моими плечами <span className="font-bold">10 лет музыкальной школы, 6 лет МПГУ</span> по эстрадно-джазовому вокалу, участие в телепроекте <span className="font-bold">«Битва Хоров»</span> на телеканале <span className="font-bold">Россия 1</span>, победа в конкурсе <span className="font-bold">«Пой в душе»</span> и годовая ротация на радио <span className="font-bold">«Русский Хит»</span>.
+                </p>
+                <p>
+                  Тысячи концертов в разных составах: <span className="font-bold">соло</span>, <span className="font-bold">вокальный ансамбль</span>, <span className="font-bold">хор</span>, <span className="font-bold">вокалист Gospel хора</span> в Москве, <span className="font-bold">выступления в кавер-бэндах</span>, а также <span className="font-bold">выступления за рубежом</span>.
+                </p>
+                
+              </div>
               <div className="flex flex-wrap gap-3">
-                <span className="px-4 py-2 rounded-full bg-muted text-sm">Работа с новичками и продолжающими</span>
-                <span className="px-4 py-2 rounded-full bg-muted text-sm">Twang, cry, belting, опора</span>
-                <span className="px-4 py-2 rounded-full bg-muted text-sm">Интонация и ритм под метроном</span>
-                <span className="px-4 py-2 rounded-full bg-muted text-sm">Подготовка к записи и сцене</span>
+                <span className="px-4 py-2 rounded-full bg-muted text-xs md:text-sm">Работа с новичками и продолжающими</span>
+                <span className="px-4 py-2 rounded-full bg-muted text-xs md:text-sm">Twang, cry, belting, опора</span>
+                <span className="px-4 py-2 rounded-full bg-muted text-xs md:text-sm">Интонация и ритм под метроном</span>
+                <span className="px-4 py-2 rounded-full bg-muted text-xs md:text-sm">Подготовка к записи и сцене</span>
               </div>
             </div>
           </div>
@@ -56,21 +71,23 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center p-8 rounded-[2rem] bg-muted animate-slide-up stagger-1">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                <span className="text-2xl">🎤</span>
+                <span className="text-2xl">📚</span>
               </div>
-              <h3 className="text-xl font-bold mb-2">Индивидуальный подход</h3>
+              <h3 className="text-xl font-bold mb-2">Сообщество и поддержка</h3>
               <p className="text-muted-foreground">
-                Каждое занятие адаптировано под ваш уровень, цели и особенности голоса
+                Чат единомышленников в Telegram с полезной информацией о вокале, музыке и практике.
               </p>
             </div>
 
             <div className="text-center p-8 rounded-[2rem] bg-muted animate-slide-up stagger-2">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                <span className="text-2xl">📚</span>
+                <span className="text-2xl">🎤</span>
               </div>
-              <h3 className="text-xl font-bold mb-2">Проверенные методики</h3>
+              <h3 className="text-xl font-bold mb-2">Удобные форматы занятий</h3>
               <p className="text-muted-foreground">
-                Авторские программы, основанные на современных техниках обучения вокалу
+                ONLINE и OFFLINE — выбирайте формат, который подходит вам.<br />
+                Домашние задания с разбором и обратной связью.<br />
+                Поддержка и связь между уроками.
               </p>
             </div>
 
