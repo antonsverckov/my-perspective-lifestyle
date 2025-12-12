@@ -20,7 +20,7 @@ export const programs: Program[] = [
     duration: "6-12 недель",
     lessons: 12,
     price: 35000,
-    image: "/images/program-voice-zero.jpg",
+    image: "/images/начинающие.png",
     features: [
       "Дыхание и контроль воздушного потока",
       "Снятие зажимов: челюсть, плечи, гортань",
