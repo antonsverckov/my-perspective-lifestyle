@@ -61,15 +61,15 @@ const HeroSection = () => {
           </div>
 
           <div className="space-y-6 pt-4 animate-slide-up stagger-2">
-            <div className="flex flex-col items-start sm:items-center gap-2">
+            <div className="flex flex-col sm:items-center gap-2 text-center md:text-left">
               <Button 
                 onClick={scrollToDiagnostic}
                 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 py-7 md:px-10 text-lg font-medium transition-all hover:scale-105 w-full sm:w-auto"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground h-auto text-wrap flex-wrap rounded-full px-4 py-4 md:py-5 md:px-10 text-lg font-medium transition-all hover:scale-105 w-full sm:w-auto"
               >
                 Записаться на диагностику вокала
               </Button>
-              <span className="font-semibold text-foreground text-xl">Стоимость диагностики: 2000 ₽</span>
+              <span className="font-semibold text-foreground text-xl text-center">Стоимость диагностики: <nobr>2000 ₽</nobr></span>
               <span className="text-foreground/80 text-sm">👌 100% возврат, если вам не понравится</span>
             </div>
 

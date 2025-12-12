@@ -106,7 +106,7 @@ const Index = () => {
             <div className="space-y-4 text-center">
               <div className="relative w-full max-w-[14rem] md:max-w-[20rem] mx-auto aspect-[2/3] md:aspect-[5/6] rounded-[1.5rem] overflow-hidden bg-muted group">
                 <img
-                  src="/anton-sverchkov+.jpeg"
+                  src="/antonsverchkov.webp"
                   alt="Антон Сверчков"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -211,25 +211,35 @@ const Index = () => {
               <p className="text-muted-foreground">
                 Отвечу на вопросы, помогу выбрать формат и пришлю первые материалы для старта.
               </p>
-              <ul className="space-y-2 text-muted-foreground">
-                <li>Telegram: <a className="text-primary hover:underline" href="https://t.me/antonsverchkov" target="_blank" rel="noreferrer">@antonsverchkov</a></li>
-                <li>Whats&nbsp;App: <a className="text-primary hover:underline" href="https://wa.me/94767544147" target="_blank" rel="noreferrer">+94767544147</a></li>
-              </ul>
             </div>
             <div className="flex flex-wrap gap-4">
               <a
                 href="https://t.me/antonsverchkov"
                 target="_blank"
                 rel="noreferrer"
-                className="px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 hover:scale-105 transition-all"
+                className="px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 hover:scale-105 transition-all inline-flex items-center gap-2"
               >
-                Написать в Telegram
+                <img
+                  src="/images/icons8-telegram.svg"
+                  alt="Telegram"
+                  className="w-8 h-8"
+                  loading="lazy"
+                />
+                <span>Написать в Telegram</span>
               </a>
               <a
-                href="mailto:anderik12@mail.ru"
-                className="px-6 py-3 rounded-full border border-border font-medium hover:border-primary hover:text-primary hover:scale-105 transition-all"
+                href="https://wa.me/94767544147"
+                target="_blank"
+                rel="noreferrer"
+                className="px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 hover:scale-105 transition-all inline-flex items-center gap-2"
               >
-                Написать на email
+                <img
+                  src="/images/icons8-whatsapp.svg"
+                  alt="WhatsApp"
+                  className="w-8 h-8"
+                  loading="lazy"
+                />
+                <span>Написать в WhatsApp</span>
               </a>
             </div>
           </div>
