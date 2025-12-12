@@ -21,15 +21,17 @@ const ProgramsSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {programs.map((program, index) => (
-            <div key={program.id} className={`animate-slide-up stagger-${index + 1}`}>
-              <ProgramCard
-                program={program}
-                onSelect={setSelectedProgram}
-                onOpenDetails={setDetailsProgram}
-              />
-            </div>
-          ))}
+          {programs
+            .filter((program) => program.id !== "diagnostic")
+            .map((program, index) => (
+              <div key={program.id} className={`animate-slide-up stagger-${index + 1}`}>
+                <ProgramCard
+                  program={program}
+                  onSelect={setSelectedProgram}
+                  onOpenDetails={setDetailsProgram}
+                />
+              </div>
+            ))}
         </div>
       </section>
 

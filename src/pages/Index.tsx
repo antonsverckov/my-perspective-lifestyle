@@ -1,10 +1,17 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import IntroSection from "@/components/IntroSection";
 import ProgramsSection from "@/components/ProgramsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import StudentVideosSection from "@/components/StudentVideosSection";
+import ContactModal from "@/components/ContactModal";
+import { programs, type Program } from "@/data/programs";
 
 const Index = () => {
+  const diagnosticProgram = programs.find((item) => item.id === "diagnostic") ?? null;
+  const [selectedDiagnostic, setSelectedDiagnostic] = useState<Program | null>(null);
+
   return (
     <div className="min-h-screen animate-fade-in">
       <Header />
@@ -15,6 +22,80 @@ const Index = () => {
 
         {/* Intro Section */}
         <IntroSection />
+
+        {/* Diagnostic Section */}
+        <section id="diagnostic" className="py-16">
+          <div className="rounded-[2rem] bg-card border border-border p-8 md:p-12 space-y-8 animate-slide-up">
+            <span className="px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium self-start">
+              {diagnosticProgram?.title ?? "Диагностика вокала"}
+            </span>
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">
+                  {diagnosticProgram?.subtitle ?? "Первый шаг к вашему голосу"}
+                </h2>
+                <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                  {diagnosticProgram?.description ??
+                    "Первое занятие, чтобы определить ваш уровень, выявить сильные стороны и зоны роста, получить обратную связь и план работы."}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="p-6 rounded-[1.5rem] bg-muted">
+                  <h3 className="text-lg font-semibold mb-3">Что включает диагностика:</h3>
+                  <ul className="space-y-2 text-sm md:text-base text-muted-foreground">
+                    {(diagnosticProgram?.features ?? [
+                      "Оценка текущего уровня",
+                      "Проверка дыхания и опоры",
+                      "Разбор зажимов и дикции",
+                      "Тест регистров и диапазона",
+                      "Первичные упражнения под ваши задачи",
+                    ]).map((item, index) => (
+                      <li key={index}>• {item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="p-6 rounded-[1.5rem] bg-muted">
+                  <h3 className="text-lg font-semibold mb-3">После диагностики:</h3>
+                  <ul className="space-y-2 text-sm md:text-base text-muted-foreground">
+                    {(diagnosticProgram?.forWhom ?? [
+                      "Понятный план развития голоса",
+                      "Рекомендации по программе обучения",
+                      "Список упражнений для старта",
+                      "Понимание формата занятий и нагрузки",
+                    ]).map((item, index) => (
+                      <li key={index}>• {item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="pt-4 space-y-3">
+                <div className="flex flex-col sm:flex-row gap-3 text-sm md:text-base text-muted-foreground">
+                  <span className="font-semibold text-foreground">
+                    Стоимость диагностики:{" "}
+                    {diagnosticProgram?.price
+                      ? `${diagnosticProgram.price.toLocaleString("ru-RU")} ₽`
+                      : "2000 ₽"}
+                  </span>
+                  <span className="text-foreground/80">
+                    {diagnosticProgram?.duration ? diagnosticProgram.duration : "45–60 минут"} · 100% возврат,
+                    если не зайдёт
+                  </span>
+                </div>
+                <button 
+                  onClick={() => setSelectedDiagnostic(diagnosticProgram)}
+                  className="px-8 py-4 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 hover:scale-105 transition-all"
+                >
+                  Записаться на диагностику
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Student Videos Section */}
+        <StudentVideosSection />
 
         {/* About Section */}
         <section id="about" className="py-16">
@@ -132,7 +213,7 @@ const Index = () => {
               </p>
               <ul className="space-y-2 text-muted-foreground">
                 <li>Telegram: <a className="text-primary hover:underline" href="https://t.me/antonsverchkov" target="_blank" rel="noreferrer">@antonsverchkov</a></li>
-                <li>Email: <a className="text-primary hover:underline" href="mailto:anderik12@mail.ru">anderik12@mail.ru</a></li>
+                <li>Whats&nbsp;App: <a className="text-primary hover:underline" href="https://wa.me/94767544147" target="_blank" rel="noreferrer">+94767544147</a></li>
               </ul>
             </div>
             <div className="flex flex-wrap gap-4">
@@ -187,6 +268,12 @@ const Index = () => {
           </div>
         </div>
       </footer>
+
+      <ContactModal
+        isOpen={!!selectedDiagnostic}
+        onClose={() => setSelectedDiagnostic(null)}
+        program={selectedDiagnostic}
+      />
     </div>
   );
 };
