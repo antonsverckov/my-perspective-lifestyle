@@ -54,3 +54,4 @@ export const diagnosticTestimonials: DiagnosticTestimonial[] = [
     avatar: "https://unavatar.io/telegram/aleksei_creative",
   },
 ];
+

@@ -1,39 +1,61 @@
-const headers = {
-  "Content-Type": "application/json",
+const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
-const respond = (statusCode: number, body: Record<string, unknown>) => ({
-  statusCode,
-  headers,
-  body: JSON.stringify(body),
-});
-
-export const handler = async (event: {
-  httpMethod: string;
-  body: string | null;
-}) => {
-  if (event.httpMethod === "OPTIONS") {
-    return { statusCode: 204, headers };
+export default async (req: Request) => {
+  // Handle CORS preflight
+  if (req.method === "OPTIONS") {
+    return new Response(null, {
+      status: 204,
+      headers: corsHeaders,
+    });
   }
 
-  if (event.httpMethod !== "POST") {
-    return respond(405, { error: "Method not allowed" });
+  if (req.method !== "POST") {
+    return new Response(
+      JSON.stringify({ error: "Method not allowed" }),
+      {
+        status: 405,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      }
+    );
   }
 
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
 
   if (!token || !chatId) {
-    return respond(500, { error: "Server misconfigured" });
+    return new Response(
+      JSON.stringify({ error: "Server misconfigured" }),
+      {
+        status: 500,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      }
+    );
   }
 
   let payload: unknown;
   try {
-    payload = event.body ? JSON.parse(event.body) : {};
+    payload = await req.json();
   } catch {
-    return respond(400, { error: "Invalid JSON" });
+    return new Response(
+      JSON.stringify({ error: "Invalid JSON" }),
+      {
+        status: 400,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      }
+    );
   }
 
   const { name, phone, message, program, telegram, email, programPrice } = payload as {
@@ -47,7 +69,16 @@ export const handler = async (event: {
   };
 
   if (!name || !phone) {
-    return respond(400, { error: "Name and phone are required" });
+    return new Response(
+      JSON.stringify({ error: "Name and phone are required" }),
+      {
+        status: 400,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      }
+    );
   }
 
   const formattedPrice =
@@ -66,25 +97,96 @@ export const handler = async (event: {
     `Сообщение: ${message || "—"}`,
   ].join("\n");
 
-  const telegramResponse = await fetch(
-    `https://api.telegram.org/bot${token}/sendMessage`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text,
-        parse_mode: "HTML",
-        disable_web_page_preview: true,
-      }),
+  try {
+    const telegramResponse = await fetch(
+      `https://api.telegram.org/bot${token}/sendMessage`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text,
+          parse_mode: "HTML",
+          disable_web_page_preview: true,
+        }),
+      }
+    );
+
+    if (!telegramResponse.ok) {
+      const errorText = await telegramResponse.text();
+      console.error("Telegram API error:", errorText);
+      return new Response(
+        JSON.stringify({ 
+          error: "Не удалось отправить сообщение в Telegram",
+          details: errorText 
+        }),
+        {
+          status: 502,
+          headers: {
+            ...corsHeaders,
+            "Content-Type": "application/json",
+          },
+        }
+      );
     }
-  );
 
-  const telegramData = await telegramResponse.json();
+    let telegramData;
+    try {
+      telegramData = await telegramResponse.json();
+    } catch (parseError) {
+      return new Response(
+        JSON.stringify({ 
+          error: "Неверный формат ответа от Telegram API" 
+        }),
+        {
+          status: 502,
+          headers: {
+            ...corsHeaders,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }
 
-  if (!telegramResponse.ok || telegramData.ok === false) {
-    return respond(502, { error: "Failed to deliver message" });
+    if (telegramData.ok === false) {
+      return new Response(
+        JSON.stringify({ 
+          error: telegramData.description || "Не удалось отправить сообщение в Telegram" 
+        }),
+        {
+          status: 502,
+          headers: {
+            ...corsHeaders,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }
+
+    return new Response(
+      JSON.stringify({ ok: true }),
+      {
+        status: 200,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  } catch (error) {
+    console.error("Unexpected error:", error);
+    return new Response(
+      JSON.stringify({ 
+        error: "Внутренняя ошибка сервера",
+        details: error instanceof Error ? error.message : String(error)
+      }),
+      {
+        status: 500,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      }
+    );
   }
-
-  return respond(200, { ok: true });
 };

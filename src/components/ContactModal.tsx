@@ -40,19 +40,67 @@ const ContactModal = ({ isOpen, onClose, program }: ContactModalProps) => {
     setIsLoading(true);
 
     try {
+      const requestBody = {
+        ...formData,
+        program: program?.title || null,
+        programPrice: program?.price ?? null
+      };
+
+      console.log("Отправка данных:", requestBody);
+
       const response = await fetch("/.netlify/functions/send-telegram", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formData,
-          program: program?.title || null,
-          programPrice: program?.price ?? null
-        })
+        body: JSON.stringify(requestBody)
       });
 
-      const result = await response.json();
+      console.log("Статус ответа:", response.status, response.statusText);
+      console.log("Content-Type:", response.headers.get("content-type"));
 
-      if (!response.ok || result?.ok === false) {
+      if (!response.ok) {
+        let errorMessage = "Не удалось отправить сообщение";
+        
+        // Специальная обработка 404
+        if (response.status === 404) {
+          errorMessage = "Функция сервера не найдена. Убедитесь, что сайт развернут на Netlify или запустите локально через 'netlify dev'";
+          throw new Error(errorMessage);
+        }
+        
+        const contentType = response.headers.get("content-type");
+        
+        if (contentType && contentType.includes("application/json")) {
+          try {
+            const errorData = await response.json();
+            console.error("Ошибка от сервера:", errorData);
+            errorMessage = errorData?.error || errorMessage;
+            if (errorData?.details) {
+              console.error("Детали ошибки:", errorData.details);
+            }
+          } catch (parseError) {
+            console.error("Ошибка парсинга JSON:", parseError);
+            errorMessage = `Ошибка сервера: ${response.status} ${response.statusText}`;
+          }
+        } else {
+          const errorText = await response.text();
+          console.error("Текст ошибки:", errorText);
+          errorMessage = `Ошибка сервера: ${response.status} ${response.statusText}`;
+        }
+        throw new Error(errorMessage);
+      }
+
+      let result;
+      try {
+        const responseText = await response.text();
+        console.log("Текст ответа:", responseText);
+        result = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("Ошибка парсинга ответа:", parseError);
+        throw new Error("Неверный формат ответа от сервера");
+      }
+
+      console.log("Результат:", result);
+
+      if (result?.ok === false) {
         throw new Error(result?.error || "Не удалось отправить сообщение");
       }
 
@@ -64,6 +112,7 @@ const ContactModal = ({ isOpen, onClose, program }: ContactModalProps) => {
       setFormData({ name: "", phone: "", email: "", telegram: "", message: "" });
       onClose();
     } catch (error) {
+      console.error("Полная ошибка:", error);
       toast({
         title: "Ошибка",
         description:
