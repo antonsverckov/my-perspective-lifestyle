@@ -8,13 +8,10 @@ const Header = () => {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const shouldBeDark = savedTheme === "dark" || (!savedTheme && prefersDark);
-    
+    const shouldBeDark = savedTheme ? savedTheme === "dark" : true;
+
     setIsDark(shouldBeDark);
-    if (shouldBeDark) {
-      document.documentElement.classList.add("dark");
-    }
+    document.documentElement.classList.toggle("dark", shouldBeDark);
   }, []);
 
   const toggleTheme = () => {

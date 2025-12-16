@@ -127,6 +127,67 @@ const detailsById: Record<string, { title: string; content: JSX.Element }> = {
       </div>
     ),
   },
+  "artist-author": {
+    title: "«АРТИСТ И АВТОР»",
+    content: (
+      <div className="space-y-4 text-sm md:text-base text-muted-foreground leading-relaxed">
+        <p>
+          <strong>Для кого:</strong> готовы записать свою первую песню, изучить свой голос и развиваться на своей
+          песне.
+        </p>
+        <p>
+          <strong>Цель:</strong> своя первая песня + авторская подача + владение своим голосом + импровизация.
+        </p>
+        <p>
+          <strong>Продолжительность:</strong> 12 недель.
+        </p>
+        <div>
+          <strong>Формат:</strong>
+          <ul className="list-disc list-inside space-y-1 mt-2">
+            <li>1 индивидуальный урок в неделю (всего 12 уроков)</li>
+            <li>2 творческие сессии в месяц по 1,5–2 часа (всего 6 сессий)</li>
+            <li>постоянная обратная связь / менторинг</li>
+          </ul>
+        </div>
+        <div>
+          <strong>Программа:</strong>
+          <ul className="list-disc list-inside space-y-1 mt-2">
+            <li>работа с убеждениями и проявленностью</li>
+            <li>поток дыхания и энергия звука</li>
+            <li>расширение диапазона</li>
+            <li>belting, twang, cry, штробас</li>
+            <li>легато / стаккато</li>
+            <li>импровизация</li>
+            <li>интонация и слух</li>
+            <li>работа с авторской песней</li>
+            <li>аранжировка песни</li>
+            <li>подача, эмоции, сцена</li>
+          </ul>
+        </div>
+        <p>
+          <strong>Результат:</strong> собственная песня + более зрелый вокальный инструмент.
+        </p>
+        <div>
+          <strong>Чек-листы:</strong>
+          <ul className="list-disc list-inside space-y-1 mt-2">
+            <li>артистическая подача</li>
+            <li>авторская песня</li>
+            <li>подготовка к записи / выступлению</li>
+            <li>вокальный рост без потолка</li>
+          </ul>
+        </div>
+        <div>
+          <strong>Стоимость:</strong>
+          <ul className="list-disc list-inside space-y-1 mt-2">
+            <li>
+              индивидуально: <strong>100 000 рублей</strong> (12 занятий + 6 сессий + песня + аранжировка и сведение,
+              запись песни оплачивается отдельно, в зависимости от точки нахождения клиента)
+            </li>
+          </ul>
+        </div>
+      </div>
+    ),
+  },
 };
 
 const ProgramDetailsModal = ({ program, onClose, onSelect }: ProgramDetailsModalProps) => {

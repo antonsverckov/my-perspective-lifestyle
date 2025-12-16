@@ -35,12 +35,7 @@ const TestimonialsSection = () => {
               <div
                 className={`h-full p-6 rounded-[1.75rem] border border-border bg-card/60 backdrop-blur-sm shadow-sm hover:shadow-lg transition-all animate-slide-up stagger-${index + 1}`}
               >
-                <div className="flex items-start gap-4 mb-4">
-                  <img
-                    src={item.avatar}
-                    alt={item.name}
-                    className="w-14 h-14 rounded-full object-cover border border-border"
-                  />
+                <div className="mb-4">
                   <div className="space-y-1">
                     <div className="flex items-center gap-3">
                       <h3 className="text-lg font-semibold">{item.name}</h3>
@@ -78,8 +73,8 @@ const TestimonialsSection = () => {
           ))}
         </CarouselContent>
 
-        <CarouselPrevious className="hidden sm:flex" />
-        <CarouselNext className="hidden sm:flex" />
+        <CarouselPrevious className="flex" />
+        <CarouselNext className="flex" />
       </Carousel>
     </section>
   );

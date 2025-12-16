@@ -18,6 +18,9 @@ const ProgramsSection = () => {
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Выберите программу, которая подходит именно вам, или свяжитесь со мной для составления индивидуального плана
           </p>
+          <p className="text-sm mt-2 text-emerald-500 font-semibold">
+            (кликни на программу для подробностей)
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
