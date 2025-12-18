@@ -1,6 +1,29 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+type NavItemId = "hero" | "programs" | "testimonials" | "about" | "contact";
+
+type NavItem = {
+  readonly id: NavItemId;
+  readonly label: string;
+};
+
+const NAV_ITEMS: readonly NavItem[] = [
+  { id: "hero", label: "Главная" },
+  { id: "programs", label: "Программы" },
+  { id: "testimonials", label: "Отзывы" },
+  { id: "about", label: "Обо мне" },
+  { id: "contact", label: "Контакты" },
+] as const;
+
+const TABLET_INLINE_COUNT = 3;
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,11 +50,14 @@ const Header = () => {
     }
   };
 
-  const scrollToId = (id: string) => {
+  const scrollToId = (id: NavItemId) => {
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: "smooth" });
     setIsMenuOpen(false);
   };
+
+  const tabletPrimaryItems = NAV_ITEMS.slice(0, TABLET_INLINE_COUNT);
+  const tabletOverflowItems = NAV_ITEMS.slice(TABLET_INLINE_COUNT);
 
   return (
     <header className="sticky top-0 z-50 py-2 sm:py-4">
@@ -39,31 +65,64 @@ const Header = () => {
         <div className="flex items-center justify-between h-14 sm:h-16 pill-nav px-4 sm:px-6">
           {/* Logo */}
           <div className="flex items-center min-w-0">
-            <a href="/" className="flex items-center gap-1.5 sm:gap-2">
-              <div className="w-7 h-7 sm:w-8 sm:h-8 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                <span className="text-primary-foreground font-bold text-base sm:text-lg">V</span>
+            <a href="/" className="flex items-center gap-2 sm:gap-3">
+              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden bg-transparent">
+                <img
+                  src="/images/logo%202.png"
+                  alt="Логотип А.Я. Сверчков"
+                  className="w-full h-full object-contain scale-110 sm:scale-125"
+                />
               </div>
               <span className="text-base sm:text-xl font-bold font-serif truncate">А.Я. Сверчков</span>
             </a>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-2">
-            <button onClick={() => scrollToId("hero")} className="text-sm font-medium hover:bg-muted/60 rounded-full px-4 py-2 transition-all">
-              Главная
-            </button>
-            <button onClick={() => scrollToId("programs")} className="text-sm font-medium hover:bg-muted/60 rounded-full px-4 py-2 transition-all">
-              Программы
-            </button>
-            <button onClick={() => scrollToId("testimonials")} className="text-sm font-medium hover:bg-muted/60 rounded-full px-4 py-2 transition-all">
-              Отзывы
-            </button>
-            <button onClick={() => scrollToId("about")} className="text-sm font-medium hover:bg-muted/60 rounded-full px-4 py-2 transition-all">
-              Обо мне
-            </button>
-            <button onClick={() => scrollToId("contact")} className="text-sm font-medium hover:bg-muted/60 rounded-full px-4 py-2 transition-all">
-              Контакты
-            </button>
+          {/* Tablet Navigation (md only) */}
+          <nav className="hidden md:flex lg:hidden items-center gap-2">
+            {tabletPrimaryItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToId(item.id)}
+                className="text-sm font-medium hover:bg-muted/60 rounded-full px-4 py-2 transition-all"
+              >
+                {item.label}
+              </button>
+            ))}
+            {tabletOverflowItems.length > 0 && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="text-sm font-medium hover:bg-muted/60 rounded-full px-4 py-2 transition-all">
+                    Еще...
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  {tabletOverflowItems.map((item) => (
+                    <DropdownMenuItem
+                      key={item.id}
+                      onSelect={(event) => {
+                        event.preventDefault();
+                        scrollToId(item.id);
+                      }}
+                    >
+                      {item.label}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+          </nav>
+
+          {/* Desktop Navigation (lg and up) */}
+          <nav className="hidden lg:flex items-center gap-2">
+            {NAV_ITEMS.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToId(item.id)}
+                className="text-sm font-medium hover:bg-muted/60 rounded-full px-4 py-2 transition-all"
+              >
+                {item.label}
+              </button>
+            ))}
           </nav>
 
           {/* Actions */}
